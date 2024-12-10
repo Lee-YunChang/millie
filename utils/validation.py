@@ -15,7 +15,6 @@ from jsonschema import (
 )
 from jsonschema.exceptions import ValidationError
 
-from utils.country import supported_countries
 from utils.exceptions import InvalidParamError
 
 
@@ -59,10 +58,6 @@ RRN_REGEX = r'^\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])-[0-49]\d{6}$'
 PHONENUMBER_REGEX = r'^(\+82|0)1\d{8,9}$'
 INTERNATIONAL_PHONENUMBER_REGEX = r"^\+[1-9]\d{1,14}$"
 EMAIL_REGEX = r'[^@]+@[^@]+\.[^@]+'
-
-DABS_CODE_REGEX = r"[A-Z]{2}[0-9]{3}[A-Z][0-9]{8}"
-
-DEAL_NAME_REGEX = r'^[^<>&]+$'
 
 UUID_SCHEMA = {
     'type': 'string',
@@ -208,20 +203,8 @@ class JsonSchema(dict):
         return JsonSchema(SWIFT_CODE_SCHEMA)
 
     @classmethod
-    def dabs_code(cls) -> JsonSchema:
-        return cls.string(min_length=14, max_length=14)
-
-    @classmethod
-    def international_dabs_code(cls) -> JsonSchema:
-        return cls.string(min_length=12, max_length=14)
-
-    @classmethod
     def address(cls) -> JsonSchema:
         return JsonSchema(ADDRESS_SCHEMA)
-
-    @classmethod
-    def deal_name(cls) -> JsonSchema:
-        return cls.string(min_length=1, max_length=200, pattern=DEAL_NAME_REGEX)
 
     @classmethod
     def key_index_information(cls) -> JsonSchema:
@@ -286,27 +269,6 @@ class JsonSchema(dict):
     def boolean(cls) -> JsonSchema:
         return JsonSchema(type='boolean')
 
-
-INTERNATIONAL_ADDRESS_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "address1": {
-            "type": "string",
-        },
-        "address2": {
-            "type": "string",
-        },
-        "countryCode": JsonSchema.string_enum(supported_countries),
-        "city": {
-            "type": "string",
-        },
-        "postalCode": {
-            "type": "string",
-        },
-    },
-    "required": ["address1", "countryCode", "city", "postalCode"],
-    "additionalProperties": False,
-}
 
 KEY_INDEX_INFORMATION_SCHEMA = {
     'type': 'array',
