@@ -35,7 +35,7 @@ DATABASES = {
         'USER': ENV.str('DB_USER', 'test'),
         'PASSWORD': ENV.str('DB_PASSWORD', '1q2w3e!@#'),
         'HOST': ENV.str('DB_HOST', 'localhost'),
-        'PORT': ENV.str('DB_PORT', '13306'),
+        'PORT': ENV.str('DB_PORT', '3306'),
         'OPTIONS': {
             'charset': 'utf8mb4',
         }
@@ -97,18 +97,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'millie.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
