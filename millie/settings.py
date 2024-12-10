@@ -35,7 +35,7 @@ DATABASES = {
         'USER': ENV.str('DB_USER', 'test'),
         'PASSWORD': ENV.str('DB_PASSWORD', '1q2w3e!@#'),
         'HOST': ENV.str('DB_HOST', 'localhost'),
-        'PORT': ENV.str('DB_PORT', '3306'),
+        'PORT': ENV.str('DB_PORT', '13306'),
         'OPTIONS': {
             'charset': 'utf8mb4',
         }
@@ -51,7 +51,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'drf_yasg',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

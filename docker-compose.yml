@@ -11,7 +11,7 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: root_password
     ports:
-      - "3306:3306"
+      - "13306:13306"
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - db_data:/var/lib/mysql
