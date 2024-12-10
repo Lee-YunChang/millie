@@ -53,6 +53,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+    'services.category'
+    'services.coupon'
+    'services.product'
 ]
 
 REST_FRAMEWORK = {
