@@ -14,7 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
+from django.http import JsonResponse
+from django.urls import path, re_path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -34,11 +35,33 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
+    path('', include('services.product.urls')),
+    path('', include('services.coupon.urls')),
+    path('', include('services.category.urls')),
+
+
     path('admin/', admin.site.urls),
-    # Swagger UI
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    # ReDoc UI
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    # 기타 URL 패턴들...
+
 ]
+def not_found(request, exception, *args, **kwargs):  # pylint: disable=unused-argument
+    # The body should be empty to be consistent with alb's fixed response
+    return JsonResponse(data={}, status=HTTP_404_NOT_FOUND)
+
+
+def internal_server_error(request, *args, **kwargs):  # pylint: disable=unused-argument
+    """ Handler for uncaught exception.
+    * https://docs.djangoproject.com/en/2.2/topics/http/urls/#error-handling
+    * https://docs.djangoproject.com/en/2.2/ref/views/#the-500-server-error-view
+    * https://docs.djangoproject.com/en/2.2/ref/urls/#handler500
+    """
+    r = custom_exception_handler(InternalServerError(), None)
+    return JsonResponse(data=r.data,
+                        status=r.status_code,
+                        json_dumps_params={'ensure_ascii': False})
+
+
+handler404 = not_found
+handler500 = internal_server_error
