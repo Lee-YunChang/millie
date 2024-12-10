@@ -7,7 +7,7 @@ name = "pypi"
 django = "==3.0.11"
 djangorestframework = "==3.12.4"
 pymysql = "==1.0.2"
-django-environ = "*"
+django-environ = "==0.4.5"
 
 [dev-packages]
 
