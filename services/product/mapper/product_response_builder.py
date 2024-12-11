@@ -1,17 +1,13 @@
-# services/product/builders/product_response_builder.py
-
 from decimal import Decimal
-from typing import Optional
-from domain.product.domain.entity import Product
-from django.utils import timezone
-from django.conf import settings
+from typing import List
+
+from domain.product.entity.entity import Product
 
 
 class ProductResponseBuilder:
 
     @classmethod
-    def build_product_response(cls,
-                               product: Product) -> dict:
+    def build_product_response(cls, product: Product) -> dict:
         response = {
             'id': product.id,
             'name': product.name,
@@ -19,9 +15,14 @@ class ProductResponseBuilder:
             'price': cls.format_decimal(product.price),
             'category_id': product.category_id,
             'discount_rate': cls.format_decimal(product.discount_rate),
+            'coupon_applicable': product.coupon_applicable,
         }
 
         return response
+
+    @classmethod
+    def build_product_list_response(cls, products: List[Product]) -> List[dict]:
+        return [cls.build_product_response(product) for product in products]
 
     @staticmethod
     def format_decimal(value: Decimal) -> str:

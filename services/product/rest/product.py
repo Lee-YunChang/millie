@@ -20,7 +20,7 @@ class ProductView(APIView):
 
         products = self._product_use_case.get_products(id)
 
-        response = self._res_builder.build_product_response(products)
+        response = self._res_builder.build_product_list_response(products)
 
         return APIResponse(
             status.HTTP_200_OK,

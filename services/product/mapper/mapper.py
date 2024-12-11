@@ -1,6 +1,6 @@
 # services/product/mappers/product_mapper.py
 
-from domain.product.domain.entity import Product
+from domain.product.entity.entity import Product
 from services.product.models import Product as ProductModel
 
 class Mapper:
@@ -13,5 +13,6 @@ class Mapper:
             description=product.description,
             price=product.price,
             category_id=product.category_id,
-            discount_rate=product.discount_rate
+            discount_rate=product.discount_rate,
+            coupon_applicable=product.coupon_applicable
         )
