@@ -1,1 +1,1 @@
-from .product import ProductView
+from .product import (ProductView, ProductDetailView)

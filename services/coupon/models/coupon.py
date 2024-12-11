@@ -2,7 +2,7 @@ import uuid
 from django.db import models
 
 class Coupon(models.Model):
-    code = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True)
+    code = models.UUIDField(default=uuid.uuid4, unique=True)
     discount_rate = models.DecimalField(max_digits=5, decimal_places=2)
 
     class Meta:

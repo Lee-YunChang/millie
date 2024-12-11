@@ -2,6 +2,7 @@ from decimal import Decimal
 from typing import List
 
 from domain.product.entity.entity import Product
+from services.category.mapper.category_response_builder import CategoryResponseBuilder
 
 
 class ProductResponseBuilder:
@@ -13,7 +14,7 @@ class ProductResponseBuilder:
             'name': product.name,
             'description': product.description,
             'price': cls.format_decimal(product.price),
-            'category_id': product.category_id,
+            'category': CategoryResponseBuilder.build_category_response(product.category),
             'discount_rate': cls.format_decimal(product.discount_rate),
             'coupon_applicable': product.coupon_applicable,
         }

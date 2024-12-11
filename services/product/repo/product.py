@@ -4,7 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from domain.product.entity.entity import Product
 from domain.product.repositories.product import ProductRepository
-from services.product.mapper.mapper import Mapper
+from services.product.mapper.mapper import ProductMapper
 from services.product.models import Product as ProductModel
 from utils.exceptions import ObjectNotFoundError
 
@@ -12,7 +12,7 @@ from utils.exceptions import ObjectNotFoundError
 class ProductRepoImpl(ProductRepository):
 
     def __init__(self):
-        self._mapper = Mapper()
+        self._mapper = ProductMapper()
 
     def get_product_by_id(self, product_id: int) -> Optional[Product]:
 
