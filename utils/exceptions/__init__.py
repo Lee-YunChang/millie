@@ -65,12 +65,4 @@ class MillieAPIException(Exception):
 
 
 from .bad_request import *
-from .conflict import *
-from .forbidden import *
-from .internal_server_error import *
 from .not_found import *
-from .service_unavailable import *
-from .too_many_requests import *
-from .unauthorized import *
-from .unprocessable_entity import *
-from .upgrade_required import *
