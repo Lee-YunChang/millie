@@ -1,0 +1,48 @@
+
+- model: product.product
+  pk: 1
+  fields:
+    name: "자라"
+    description: "자라"
+    price: "10000.00"
+    discount_rate: "5.00"
+    category: 1
+    coupon_applicable: true
+
+- model: product.product
+  pk: 2
+  fields:
+    name: "스파오"
+    description: "스파오"
+    price: "20000.00"
+    discount_rate: "10.00"
+    category: 1
+    coupon_applicable: true
+
+
+
+- model: category.category
+  pk: 1
+  fields:
+    name: "의류"
+    description: "옷"
+
+- model: category.category
+  pk: 2
+  fields:
+    name: "식품"
+    description: "먹거리"
+
+
+
+- model: coupon.coupon
+  pk: 1
+  fields:
+    code: "846ca2ed03154af998ec31933852a5a3"
+    discount_rate: "10.00"
+
+- model: coupon.coupon
+  pk: 2
+  fields:
+    code: "ccebb3af2fa44299bc979f79678d2c23"
+    discount_rate: "20.00"
