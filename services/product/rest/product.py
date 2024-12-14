@@ -39,8 +39,9 @@ class ProductDetailView(APIView):
     def get(self, request, product_id:int, coupon_code:uuid):
 
         product_detail = self._product_use_case.get_product_detail(product_id, coupon_code)
+        response = self._res_builder.build_product_detail_response(product_detail)
 
         return APIResponse(
             status.HTTP_200_OK,
-            data=product_detail
+            data=response
         )
